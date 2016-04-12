@@ -25,7 +25,7 @@ import org.apache.curator.retry.RetryNTimes;
  * @author Thanh Nguyen <btnguyen2k@gmail.com>
  * @since 0.1.0
  */
-public class ZookeeperIdGenerator extends SerialIdGenerator {
+public class ZookeeperIdGenerator extends SerialIdGenerator implements IdentityGenerator {
 
     /**
      * Helper method to obtain {@link ZookeeperIdGenerator}.
