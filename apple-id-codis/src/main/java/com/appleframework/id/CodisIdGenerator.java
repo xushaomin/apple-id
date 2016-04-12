@@ -34,11 +34,10 @@ public class CodisIdGenerator extends SerialIdGenerator implements IdentityGener
     /**
      * Helper method to obtain {@link CodisIdGenerator}.
      * 
-     * @param redisHost
-     * @param redisPort
-     * @param redisUser
-     * @param redisPassword
-     * @param redisPoolConfig
+     * @param zkAddr
+     * @param zkProxyDir
+     * @param zkSessionTimeoutMs
+     * @param 
      * @return
      */
     public static CodisIdGenerator getInstance(final String zkAddr, final String zkProxyDir, final int zkSessionTimeoutMs) {
