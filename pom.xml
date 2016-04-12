@@ -48,8 +48,8 @@
 		<module>apple-id-zookeeper</module>
 		<module>apple-id-jdbc</module>
 		<module>apple-id-snowflake</module>
-    <module>apple-id-codis</module>
-    <module>apple-id-redisson</module>
+    	<module>apple-id-codis</module>
+    	<module>apple-id-redisson</module>
 	</modules>
 	
 	<build>
