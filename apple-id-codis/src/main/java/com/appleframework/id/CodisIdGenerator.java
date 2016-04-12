@@ -21,7 +21,7 @@ import redis.clients.jedis.Jedis;
  * @author Thanh Nguyen <btnguyen2k@gmail.com>
  * @since 0.1.0
  */
-public class CodisIdGenerator extends SerialIdGenerator {
+public class CodisIdGenerator extends SerialIdGenerator implements IdentityGenerator {
 
 	private static Logger logger = Logger.getLogger(CodisIdGenerator.class);  
 

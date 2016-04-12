@@ -21,7 +21,7 @@ import org.redisson.core.RAtomicLong;
  * @author cruise.xu
  * @since 0.1.0
  */
-public class RedissonIdGenerator extends SerialIdGenerator {
+public class RedissonIdGenerator extends SerialIdGenerator implements IdentityGenerator {
 
 	private static Logger logger = Logger.getLogger(RedissonIdGenerator.class);  
 

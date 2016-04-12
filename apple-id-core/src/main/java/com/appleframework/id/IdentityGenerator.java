@@ -7,6 +7,6 @@ package com.appleframework.id;
  */
 public interface IdentityGenerator {
 	
-	Long generateId();
+	public long nextId(final String namespace);
 	
 }

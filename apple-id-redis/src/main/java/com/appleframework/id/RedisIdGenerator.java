@@ -21,7 +21,7 @@ import com.appleframework.id.redis.RedisClientFactory;
  * @author Thanh Nguyen <btnguyen2k@gmail.com>
  * @since 0.1.0
  */
-public class RedisIdGenerator extends SerialIdGenerator {
+public class RedisIdGenerator extends SerialIdGenerator implements IdentityGenerator {
 
 	private static Logger logger = Logger.getLogger(RedisIdGenerator.class);  
 

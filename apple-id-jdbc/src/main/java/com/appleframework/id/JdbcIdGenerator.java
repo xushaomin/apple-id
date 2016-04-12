@@ -28,7 +28,7 @@ import com.appleframework.id.exception.IdException;
  * @author Thanh Nguyen <btnguyen2k@gmail.com>
  * @since 0.3.0
  */
-public class JdbcIdGenerator extends SerialIdGenerator {
+public class JdbcIdGenerator extends SerialIdGenerator implements IdentityGenerator {
 
     /**
      * Helper method to obtain {@link JdbcIdGenerator}.

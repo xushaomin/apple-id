@@ -32,7 +32,7 @@ import com.google.common.cache.RemovalNotification;
  * @author Thanh Nguyen <btnguyen2k@gmail.com>
  * @since 0.1.0
  */
-public class SnowflakeIdGenerator {
+public class SnowflakeIdGenerator implements IdentityGenerator {
 
 	private final static LoadingCache<Long, SnowflakeIdGenerator> idGenerators = CacheBuilder
 			.newBuilder().expireAfterAccess(3600, TimeUnit.SECONDS)
@@ -437,4 +437,21 @@ public class SnowflakeIdGenerator {
 		biResult = biResult.or(template128).or(biSequence);
 		return biResult;
 	}
+
+	@Override
+	public long nextId(String namespace) {
+		if(null == namespace)
+			return this.generateIdMini();
+		else if(namespace.equals("mini")) 
+			return this.generateIdMini();
+		else if(namespace.equals("48")) 
+			return this.generateId48();
+		else if(namespace.equals("64")) 
+			return this.generateId64();
+		else if(namespace.equals("tiny")) 
+			return this.generateIdTiny();
+		else
+			return this.generateId128().longValue();
+	}
+	
 }
