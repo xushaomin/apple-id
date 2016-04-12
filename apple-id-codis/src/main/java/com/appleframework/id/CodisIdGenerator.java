@@ -100,7 +100,11 @@ public class CodisIdGenerator extends SerialIdGenerator implements IdentityGener
     @Override
     public long currentId(final String namespace) {
     	try (Jedis jedis = codisResourcePool.getResource()) {
-    		return Long.parseLong(jedis.get(namespace));
+    		String id = jedis.get(namespace);
+    		if(null != id)
+    			return Long.parseLong(id);
+    		else
+    			return 0L;
     	}
     }
 
