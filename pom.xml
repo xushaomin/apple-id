@@ -4,13 +4,14 @@
 
 	<groupId>com.appleframework.id</groupId>
 	<artifactId>apple-id</artifactId>
-	<version>0.0.4.RELEASE</version>
+	<version>0.0.5.RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>apple-id</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<file.encoding>UTF-8</file.encoding>
 		<guava.version>16.0.1</guava.version>
 	</properties>
 
