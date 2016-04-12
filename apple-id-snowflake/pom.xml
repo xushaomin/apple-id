@@ -6,14 +6,12 @@
 	<parent>
 		<groupId>com.appleframework.id</groupId>
 		<artifactId>apple-id</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2.RELEASE</version>
 	</parent>
 	<artifactId>apple-id-snowflake</artifactId>
 	<name>apple-id-snowflake</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -30,9 +28,15 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>com.yammer.metrics</groupId>
-				<artifactId>metrics-core</artifactId>
-				<scope>test</scope>
-			</dependency>
+			<groupId>com.yammer.metrics</groupId>
+			<artifactId>metrics-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.groboutils</groupId>
+			<artifactId>groboutils-core</artifactId>
+			<version>5</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

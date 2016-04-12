@@ -1,10 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.appleframework.id</groupId>
 	<artifactId>apple-id</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2.RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>apple-id</name>
@@ -48,6 +48,8 @@
 		<module>apple-id-zookeeper</module>
 		<module>apple-id-jdbc</module>
 		<module>apple-id-snowflake</module>
+    <module>apple-id-codis</module>
+    <module>apple-id-redisson</module>
 	</modules>
 	
 	<build>
@@ -100,6 +102,19 @@
 							<value>target/cobertura/cobertura.ser</value>
 						</property>
 					</systemProperties>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>  
+                     		<Bundle-Name>${project.artifactId}</Bundle-Name>
+                     		<Bundle-Version>${project.version}</Bundle-Version>
+                     	</manifestEntries>  
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
