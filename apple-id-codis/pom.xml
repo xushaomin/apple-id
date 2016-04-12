@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.appleframework.id</groupId>
+		<artifactId>apple-id</artifactId>
+		<version>0.0.2.RELEASE</version>
+	</parent>
+	<artifactId>apple-id-codis</artifactId>
+	<name>apple-id-codis</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.codis.jodis</groupId>
+			<artifactId>jodis</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.appleframework.id</groupId>
+			<artifactId>apple-id-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+	</dependencies>
+</project>
