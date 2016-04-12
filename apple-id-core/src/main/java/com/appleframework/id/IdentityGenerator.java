@@ -7,6 +7,24 @@ package com.appleframework.id;
  */
 public interface IdentityGenerator {
 	
+	/**
+     * Gets current id.
+     * 
+     * @param namespace
+     * @return current id for the specified namespace as long, negative value if
+     *         error.
+     * @since 0.2.0
+     */
 	public long nextId(final String namespace);
+	
+	/**
+     * Sets a value.
+     * 
+     * @param namespace
+     * @param value
+     * @return
+     * @since 0.4.0
+     */
+    public boolean setValue(final String namespace, final long value);
 	
 }

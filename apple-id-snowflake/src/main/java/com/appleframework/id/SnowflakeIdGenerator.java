@@ -437,6 +437,13 @@ public class SnowflakeIdGenerator implements IdentityGenerator {
 		biResult = biResult.or(template128).or(biSequence);
 		return biResult;
 	}
+	
+	
+
+	@Override
+	public boolean setValue(String namespace, long value) {
+		return false;
+	}
 
 	@Override
 	public long nextId(String namespace) {
@@ -450,8 +457,10 @@ public class SnowflakeIdGenerator implements IdentityGenerator {
 			return this.generateId64();
 		else if(namespace.equals("tiny")) 
 			return this.generateIdTiny();
-		else
+		else if(namespace.equals("128")) 
 			return this.generateId128().longValue();
+		else
+			return this.generateIdMini();
 	}
 	
 }
