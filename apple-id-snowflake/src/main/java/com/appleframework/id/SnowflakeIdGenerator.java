@@ -38,15 +38,13 @@ public class SnowflakeIdGenerator {
 			.newBuilder().expireAfterAccess(3600, TimeUnit.SECONDS)
 			.removalListener(new RemovalListener<Long, SnowflakeIdGenerator>() {
 				@Override
-				public void onRemoval(
-						RemovalNotification<Long, SnowflakeIdGenerator> entry) {
+				public void onRemoval(RemovalNotification<Long, SnowflakeIdGenerator> entry) {
 					entry.getValue().destroy();
 				}
 			}).build(new CacheLoader<Long, SnowflakeIdGenerator>() {
 				@Override
 				public SnowflakeIdGenerator load(Long nodeId) throws Exception {
-					SnowflakeIdGenerator idGen = new SnowflakeIdGenerator(
-							nodeId);
+					SnowflakeIdGenerator idGen = new SnowflakeIdGenerator(nodeId);
 					idGen.init();
 					return idGen;
 				}
@@ -142,8 +140,7 @@ public class SnowflakeIdGenerator {
 		this.templateMini = (this.nodeId & MASK_NODE_ID_MINI) << SHIFT_NODE_ID_MINI;
 		this.template64 = (this.nodeId & MASK_NODE_ID_64) << SHIFT_NODE_ID_64;
 		this.template48 = (this.nodeId & MASK_NODE_ID_48) << SHIFT_NODE_ID_48;
-		this.template128 = BigInteger
-				.valueOf((this.nodeId & MASK_NODE_ID_128) << SHIFT_NODE_ID_128);
+		this.template128 = BigInteger.valueOf((this.nodeId & MASK_NODE_ID_128) << SHIFT_NODE_ID_128);
 	}
 
 	protected void destroy() {
@@ -158,8 +155,7 @@ public class SnowflakeIdGenerator {
 	 */
 	public static long waitTillNextMillisec(long currentMillisec) {
 		long nextMillisec = System.currentTimeMillis();
-		for (; nextMillisec <= currentMillisec; nextMillisec = System
-				.currentTimeMillis()) {
+		for (; nextMillisec <= currentMillisec; nextMillisec = System.currentTimeMillis()) {
 			Thread.yield();
 		}
 		return nextMillisec;
@@ -173,8 +169,7 @@ public class SnowflakeIdGenerator {
 	 */
 	public static long waitTillNextSecond(long currentSecond) {
 		long nextSecond = System.currentTimeMillis() / 1000L;
-		for (; nextSecond <= currentSecond; nextSecond = System
-				.currentTimeMillis() / 1000) {
+		for (; nextSecond <= currentSecond; nextSecond = System.currentTimeMillis() / 1000) {
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
@@ -193,8 +188,7 @@ public class SnowflakeIdGenerator {
 	 */
 	public static long waitTillNextTick(long currentTick, long tickSize) {
 		long nextBlock = System.currentTimeMillis() / tickSize;
-		for (; nextBlock <= currentTick; nextBlock = System.currentTimeMillis()
-				/ tickSize) {
+		for (; nextBlock <= currentTick; nextBlock = System.currentTimeMillis() / tickSize) {
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
@@ -300,8 +294,7 @@ public class SnowflakeIdGenerator {
 			this.lastTimestampMillisec.set(timestamp);
 		}
 		timestamp = (timestamp - TIMESTAMP_EPOCH) & MASK_TIMESTAMP_48;
-		long result = timestamp << SHIFT_TIMESTAMP_48 | template48
-				| (sequence & MASK_SEQUENCE_48);
+		long result = timestamp << SHIFT_TIMESTAMP_48 | template48 | (sequence & MASK_SEQUENCE_48);
 		return result;
 	}
 
@@ -346,8 +339,7 @@ public class SnowflakeIdGenerator {
 			this.lastTimestampMillisec.set(timestamp);
 		}
 		timestamp = (timestamp - TIMESTAMP_EPOCH) & MASK_TIMESTAMP_MINI;
-		long result = timestamp << SHIFT_TIMESTAMP_MINI | templateMini
-				| (sequence & MASK_SEQUENCE_MINI);
+		long result = timestamp << SHIFT_TIMESTAMP_MINI | templateMini | (sequence & MASK_SEQUENCE_MINI);
 		return result;
 	}
 
@@ -393,8 +385,7 @@ public class SnowflakeIdGenerator {
 			this.lastTimestampMillisec.set(timestamp);
 		}
 		timestamp = (timestamp - TIMESTAMP_EPOCH) & MASK_TIMESTAMP_64;
-		long result = timestamp << SHIFT_TIMESTAMP_64 | template64
-				| (sequence & MASK_SEQUENCE_64);
+		long result = timestamp << SHIFT_TIMESTAMP_64 | template64 | (sequence & MASK_SEQUENCE_64);
 		return result;
 	}
 
@@ -440,8 +431,7 @@ public class SnowflakeIdGenerator {
 			this.lastTimestampMillisec.set(timestamp);
 		}
 
-		BigInteger biSequence = BigInteger
-				.valueOf(sequence & MASK_SEQUENCE_128);
+		BigInteger biSequence = BigInteger.valueOf(sequence & MASK_SEQUENCE_128);
 		BigInteger biResult = BigInteger.valueOf(timestamp);
 		biResult = biResult.shiftLeft((int) SHIFT_TIMESTAMP_128);
 		biResult = biResult.or(template128).or(biSequence);

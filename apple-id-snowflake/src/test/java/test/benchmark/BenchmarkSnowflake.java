@@ -34,9 +34,9 @@ public class BenchmarkSnowflake {
     }
 
     public static void main(String[] args) {
-        int numRuns, numThreads, numNamespaces;
+        int numRuns = 1000, numThreads = 4, numNamespaces = 4;
 
-        try {
+        /*try {
             numRuns = Integer.parseInt(System.getProperty("numRuns"));
         } catch (Exception e) {
             numRuns = 1000000;
@@ -50,7 +50,7 @@ public class BenchmarkSnowflake {
             numNamespaces = Integer.parseInt(System.getProperty("numNamespaces"));
         } catch (Exception e) {
             numNamespaces = 4;
-        }
+        }*/
 
         System.out.println("Num runs: " + numRuns + " / Num threads: " + numThreads
                 + " / Num namespaces: " + numNamespaces);

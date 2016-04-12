@@ -82,14 +82,10 @@ public class ZookeeperIdGenerator extends SerialIdGenerator {
     @Override
     public ZookeeperIdGenerator init() {
         super.init();
-
         semaphore = new Semaphore(concurrency, true);
-
         RetryPolicy retryPolicy = new RetryNTimes(1, 2000);
-        curatorFramework = CuratorFrameworkFactory.newClient(zkConnString, 3600000, 3000,
-                retryPolicy);
+        curatorFramework = CuratorFrameworkFactory.newClient(zkConnString, 3600000, 3000, retryPolicy);
         curatorFramework.start();
-
         return this;
     }
 
@@ -128,11 +124,9 @@ public class ZookeeperIdGenerator extends SerialIdGenerator {
         final String pathLock = paths[1];
 
         RetryPolicy retryPolicyMutex = new BoundedExponentialBackoffRetry(10, 1000, 5);
-        PromotedToLock promotedToLock = PromotedToLock.builder().retryPolicy(retryPolicyMutex)
-                .lockPath(pathLock).build();
+        PromotedToLock promotedToLock = PromotedToLock.builder().retryPolicy(retryPolicyMutex).lockPath(pathLock).build();
         RetryPolicy retryPolicyOptimistic = new RetryNTimes(3, 100);
-        DistributedAtomicLong dal = new DistributedAtomicLong(curatorFramework, pathId,
-                retryPolicyOptimistic, promotedToLock);
+        DistributedAtomicLong dal = new DistributedAtomicLong(curatorFramework, pathId, retryPolicyOptimistic, promotedToLock);
         semaphore.acquireUninterruptibly();
         try {
             AtomicValue<Long> value = dal.increment();
@@ -157,11 +151,9 @@ public class ZookeeperIdGenerator extends SerialIdGenerator {
         final String pathLock = paths[1];
 
         RetryPolicy retryPolicyMutex = new BoundedExponentialBackoffRetry(10, 1000, 5);
-        PromotedToLock promotedToLock = PromotedToLock.builder().retryPolicy(retryPolicyMutex)
-                .lockPath(pathLock).build();
+        PromotedToLock promotedToLock = PromotedToLock.builder().retryPolicy(retryPolicyMutex).lockPath(pathLock).build();
         RetryPolicy retryPolicyOptimistic = new RetryNTimes(3, 100);
-        DistributedAtomicLong dal = new DistributedAtomicLong(curatorFramework, pathId,
-                retryPolicyOptimistic, promotedToLock);
+        DistributedAtomicLong dal = new DistributedAtomicLong(curatorFramework, pathId, retryPolicyOptimistic, promotedToLock);
         try {
             AtomicValue<Long> value = dal.get();
             if (value != null && value.succeeded()) {
@@ -186,11 +178,9 @@ public class ZookeeperIdGenerator extends SerialIdGenerator {
         final String pathLock = paths[1];
 
         RetryPolicy retryPolicyMutex = new BoundedExponentialBackoffRetry(10, 1000, 5);
-        PromotedToLock promotedToLock = PromotedToLock.builder().retryPolicy(retryPolicyMutex)
-                .lockPath(pathLock).build();
+        PromotedToLock promotedToLock = PromotedToLock.builder().retryPolicy(retryPolicyMutex).lockPath(pathLock).build();
         RetryPolicy retryPolicyOptimistic = new RetryNTimes(3, 100);
-        DistributedAtomicLong dal = new DistributedAtomicLong(curatorFramework, pathId,
-                retryPolicyOptimistic, promotedToLock);
+        DistributedAtomicLong dal = new DistributedAtomicLong(curatorFramework, pathId, retryPolicyOptimistic, promotedToLock);
         semaphore.acquireUninterruptibly();
         try {
             dal.forceSet(value);
