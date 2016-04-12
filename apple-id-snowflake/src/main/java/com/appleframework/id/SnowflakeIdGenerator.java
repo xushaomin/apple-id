@@ -444,6 +444,11 @@ public class SnowflakeIdGenerator implements IdentityGenerator {
 	public boolean setValue(String namespace, long value) {
 		return false;
 	}
+	
+	@Override
+	public long currentId(String namespace) {
+		return 0;
+	}
 
 	@Override
 	public long nextId(String namespace) {
