@@ -116,7 +116,7 @@ public class CodisIdGenerator extends SerialIdGenerator implements IdentityGener
     @Override
     public boolean setValue(final String namespace, final long value) {
     	try (Jedis jedis = codisResourcePool.getResource()) {
-    		jedis.incrBy(namespace, value);
+    		jedis.set(namespace, String.valueOf(value));
     	}
     	return true;
     }
