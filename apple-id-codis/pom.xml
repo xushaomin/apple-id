@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.appleframework.id</groupId>
 		<artifactId>apple-id</artifactId>
-		<version>0.0.6.RELEASE</version>
+		<version>0.0.9.RELEASE</version>
 	</parent>
 	<artifactId>apple-id-codis</artifactId>
 	<name>apple-id-codis</name>
@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>io.codis.jodis</groupId>
 			<artifactId>jodis</artifactId>
-			<version>0.3.0</version>
+			<version>0.3.2.APPLE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.appleframework.id</groupId>

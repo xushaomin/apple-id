@@ -4,7 +4,7 @@
 
 	<groupId>com.appleframework.id</groupId>
 	<artifactId>apple-id</artifactId>
-	<version>0.0.6.RELEASE</version>
+	<version>0.0.9.RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>apple-id</name>
@@ -12,7 +12,7 @@
 
 	<properties>
 		<file.encoding>UTF-8</file.encoding>
-		<guava.version>16.0.1</guava.version>
+		<guava.version>19.0</guava.version>
 	</properties>
 
 	<dependencyManagement>
@@ -130,11 +130,11 @@
 			<distributionManagement>
 				<repository>
 					<id>apple-releases</id>
-					<url>http://mvnrepo.appleframework.com/nexus/content/repositories/releases/</url>
+					<url>http://mvnrepo.appleframework.com:8081/nexus/content/repositories/releases/</url>
 				</repository>
 				<snapshotRepository>
 					<id>apple-snapshots</id>
-					<url>http://mvnrepo.appleframework.com/nexus/content/repositories/snapshots/</url>
+					<url>http://mvnrepo.appleframework.com:8081/nexus/content/repositories/snapshots/</url>
 				</snapshotRepository>
 			</distributionManagement>
 		</profile>
