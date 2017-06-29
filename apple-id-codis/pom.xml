@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.appleframework.id</groupId>
 		<artifactId>apple-id</artifactId>
-		<version>0.0.9.RELEASE</version>
+		<version>0.1.0.RELEASE</version>
 	</parent>
 	<artifactId>apple-id-codis</artifactId>
 	<name>apple-id-codis</name>
@@ -25,12 +25,8 @@
 		<dependency>
 			<groupId>io.codis.jodis</groupId>
 			<artifactId>jodis</artifactId>
-			<version>0.3.0</version>
+			<version>0.4.0</version>
 			<exclusions>
-				<exclusion>
-					<groupId>redis.clients</groupId>
-            		<artifactId>jedis</artifactId>
-				</exclusion>
 				<exclusion>
 					<groupId>org.apache.curator</groupId>
             		<artifactId>curator-recipes</artifactId>
@@ -51,11 +47,6 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		
-		<dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.8.1</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>

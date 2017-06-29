@@ -4,10 +4,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.log4j.Logger;
-import org.redisson.Config;
 import org.redisson.Redisson;
-import org.redisson.RedissonClient;
-import org.redisson.core.RAtomicLong;
+import org.redisson.api.RAtomicLong;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 
 
 /**

@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>com.appleframework.id</groupId>
 		<artifactId>apple-id</artifactId>
-		<version>0.0.9.RELEASE</version>
+		<version>0.1.0.RELEASE</version>
 	</parent>
 	<artifactId>apple-id-redis</artifactId>
 	<name>apple-id-redis</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<jedis.version>2.8.1</jedis.version>
+		<jedis.version>2.9.0</jedis.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<commons-pool2.version>2.2</commons-pool2.version>
 	</properties>

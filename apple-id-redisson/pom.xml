@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.appleframework.id</groupId>
 		<artifactId>apple-id</artifactId>
-		<version>0.0.9.RELEASE</version>
+		<version>0.1.0.RELEASE</version>
 	</parent>
 	<artifactId>apple-id-redisson</artifactId>
 	<name>apple-id-redisson</name>
@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>org.redisson</groupId>
 			<artifactId>redisson</artifactId>
-			<version>2.2.14-1.APPLE</version>
+			<version>2.9.3</version>
 		</dependency>
 	</dependencies>
 </project>
