@@ -3,6 +3,7 @@ package test.benchmark;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 
 import com.appleframework.id.RedisIdGenerator;
 import redis.clients.jedis.JedisPoolConfig;
@@ -10,7 +11,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 public class BenchmarkRedis extends BaseBenchmarkSerialId {
 	
-	private static String hostName = "localhost";
+	private static String hostName = "127.0.0.1";
     private static String passWord = null;
     private static Integer port = 6379;
     private static Integer database = 0;
@@ -36,10 +37,14 @@ public class BenchmarkRedis extends BaseBenchmarkSerialId {
     }
     
     public static RedisTemplate<String, Long> redisTemplateObject() throws Exception {  
-        RedisTemplate<String, Long> redisTemplateObject = new RedisTemplate<String, Long>();  
-        redisTemplateObject.setConnectionFactory(redisConnectionFactory());  
-        redisTemplateObject.afterPropertiesSet();  
-        return redisTemplateObject;  
+        RedisTemplate<String, Long> redisTemplate = new RedisTemplate<String,Long>();  
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+        GenericToStringSerializer<Long> genericToStringSerializer = new GenericToStringSerializer<Long>(Long.class);
+        // 6.序列化类，对象映射设置
+        // 7.设置 value 的转化格式和 key 的转化格式
+        redisTemplate.setValueSerializer(genericToStringSerializer);
+        redisTemplate.afterPropertiesSet();  
+        return redisTemplate;  
     }
 
     public static void main(String[] args) throws Exception {

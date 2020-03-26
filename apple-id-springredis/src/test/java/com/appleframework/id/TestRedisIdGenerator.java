@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -22,7 +23,7 @@ public class TestRedisIdGenerator extends TestCase {
     private RedisTemplate<String, Long> redisTemplate;
     private RedisIdGenerator idGenerator;
     
-    private String hostName = "localhost";
+    private String hostName = "127.0.0.1";
     private String passWord = null;
     private Integer port = 6379;
     private Integer database = 0;
@@ -53,10 +54,12 @@ public class TestRedisIdGenerator extends TestCase {
     }
     
     public RedisTemplate<String, Long> redisTemplateObject() throws Exception {  
-        RedisTemplate<String, Long> redisTemplateObject = new RedisTemplate<String, Long>();  
-        redisTemplateObject.setConnectionFactory(redisConnectionFactory());  
-        redisTemplateObject.afterPropertiesSet();  
-        return redisTemplateObject;  
+        RedisTemplate<String, Long> redisTemplate = new RedisTemplate<String, Long>();  
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+        GenericToStringSerializer<Long> genericToStringSerializer = new GenericToStringSerializer<Long>(Long.class);
+        redisTemplate.setValueSerializer(genericToStringSerializer);
+        redisTemplate.afterPropertiesSet();  
+        return redisTemplate;  
     }
 
     @Before
@@ -72,6 +75,8 @@ public class TestRedisIdGenerator extends TestCase {
 
     @org.junit.Test
     public void test1() throws Exception {
+        idGenerator.setValue("default", 10000L);
+
     	System.out.println(idGenerator.nextId("default"));
         assertEquals(0, idGenerator.currentId("default"));
     }

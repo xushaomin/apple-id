@@ -31,7 +31,7 @@ public class RedisIdGenerator extends SerialIdGenerator implements IdentityGener
      */
 	public static RedisIdGenerator getInstance(final RedisTemplate<String, Long> redisTemplate) {
 		StringBuilder key = new StringBuilder();
-		key.append(redisTemplate.toString());
+		key.append(redisTemplate.hashCode());
 		try {
 			RedisIdGenerator idGen = (RedisIdGenerator) idGenerators.get(key.toString(),
 					new Callable<SerialIdGenerator>() {
