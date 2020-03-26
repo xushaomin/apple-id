@@ -10,11 +10,7 @@ import junit.framework.TestSuite;
 
 import org.junit.After;
 import org.junit.Before;
-
-import com.appleframework.id.redis.IRedisClient;
-import com.appleframework.id.redis.RedisClientFactory;
-
-import redis.embedded.RedisServer;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * Test case for {@link RedisIdGenerator}
@@ -24,9 +20,7 @@ import redis.embedded.RedisServer;
  */
 public class TestRedisIdGenerator extends TestCase {
 
-    protected final static String REDIS_HOST = "localhost";
-    protected final static int REDIS_PORT = 16379;
-    private RedisServer redisServer;
+    private RedisTemplate<String, Long> redisTemplate;
     private RedisIdGenerator idGenerator;
 
     public static Test suite() {
@@ -35,10 +29,6 @@ public class TestRedisIdGenerator extends TestCase {
 
     @Before
     public void setUp() throws Exception {
-        redisServer = RedisServer.builder().port(REDIS_PORT).setting("daemonize no")
-                .setting("save \"\"").build();
-        redisServer.start();
-        RedisClientFactory redisFactory = RedisClientFactory.newFactory();
         boolean done = true;
         do {
             IRedisClient redisClient = redisFactory.getRedisClient(REDIS_HOST, REDIS_PORT);
@@ -54,7 +44,7 @@ public class TestRedisIdGenerator extends TestCase {
         } while (!done);
         redisFactory.destroy();
 
-        idGenerator = RedisIdGenerator.getInstance("localhost", REDIS_PORT);
+        idGenerator = RedisIdGenerator.getInstance(redisTemplate);
     }
 
     @After

@@ -7,9 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import com.appleframework.id.exception.IdException;
-import com.appleframework.id.redis.IRedisClient;
-import com.appleframework.id.redis.PoolConfig;
-import com.appleframework.id.redis.RedisClientFactory;
 
 /**
  * This id generator utilizes Redis (http://redis.io/) to generate serial IDs.
@@ -19,7 +16,7 @@ import com.appleframework.id.redis.RedisClientFactory;
  * Redis backend runs in persistent mode).
  * </p>
  * 
- * @author Thanh Nguyen <btnguyen2k@gmail.com>
+ * @author cruise.xu <xushaomin@foxmail.com>
  * @since 0.1.0
  */
 public class RedisIdGenerator extends SerialIdGenerator implements IdentityGenerator {
@@ -32,7 +29,7 @@ public class RedisIdGenerator extends SerialIdGenerator implements IdentityGener
      * @param redisTemplate
      * @return
      */
-	public static RedisIdGenerator getInstance(final RedisTemplate<String, Object> redisTemplate) {
+	public static RedisIdGenerator getInstance(final RedisTemplate<String, Long> redisTemplate) {
 		StringBuilder key = new StringBuilder();
 		key.append(redisTemplate.toString());
 		try {
@@ -52,13 +49,13 @@ public class RedisIdGenerator extends SerialIdGenerator implements IdentityGener
 		}
 	}
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, Long> redisTemplate;
 
-    public RedisTemplate<String, Object> getRedisTemplate() {
+    public RedisTemplate<String, Long> getRedisTemplate() {
 		return redisTemplate;
 	}
     
-	public RedisIdGenerator setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+	public RedisIdGenerator setRedisTemplate(RedisTemplate<String, Long> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 		return this;
 	}
@@ -80,43 +77,32 @@ public class RedisIdGenerator extends SerialIdGenerator implements IdentityGener
      * {@inheritDoc}
      */
     @Override
-    public long nextId(final String namespace) {
-        IRedisClient redisClient = redisFactory.getRedisClient(redisHost, redisPort, redisUser,
-                redisPassword, redisPoolConfig);
-        if (redisClient != null) {
-            try {
-                return redisClient.incBy(namespace, 1);
-            } catch (Exception e) {
-                throw new IdException.OperationFailedException(e);
-            } finally {
-                redisClient.close();
-            }
-        } else {
-            return -1;
-        }
-    }
+	public long nextId(final String namespace) {
+		if (redisTemplate != null) {
+			try {
+				return redisTemplate.opsForValue().increment(namespace, 1);
+			} catch (Exception e) {
+				throw new IdException.OperationFailedException(e);
+			}
+		} else {
+			return -1;
+		}
+	}
 
     /**
      * {@inheritDoc}
      */
     @Override
     public long currentId(final String namespace) {
-        IRedisClient redisClient = redisFactory.getRedisClient(redisHost, redisPort, redisUser,
-                redisPassword, redisPoolConfig);
-        if (redisClient != null) {
-            try {
-                String value = redisClient.get(namespace);
-                return Long.parseLong(value);
-            } catch (NumberFormatException | NullPointerException e) {
-                return 0;
-            } catch (Exception e) {
-                throw new IdException.OperationFailedException(e);
-            } finally {
-                redisClient.close();
-            }
-        } else {
-            return -1;
-        }
+    	if (redisTemplate != null) {
+			try {
+				return redisTemplate.opsForValue().get(namespace);
+			} catch (Exception e) {
+				throw new IdException.OperationFailedException(e);
+			}
+		} else {
+			return -1;
+		}
     }
 
     /**
@@ -126,16 +112,12 @@ public class RedisIdGenerator extends SerialIdGenerator implements IdentityGener
      */
     @Override
     public boolean setValue(final String namespace, final long value) {
-        IRedisClient redisClient = redisFactory.getRedisClient(redisHost, redisPort, redisUser,
-                redisPassword, redisPoolConfig);
-        if (redisClient != null) {
+        if (redisTemplate != null) {
             try {
-                redisClient.set(namespace, String.valueOf(value), IRedisClient.TTL_PERSISTENT);
+            	redisTemplate.opsForValue().set(namespace, value);
                 return true;
             } catch (Exception e) {
                 throw new IdException.OperationFailedException(e);
-            } finally {
-                redisClient.close();
             }
         } else {
             return false;
