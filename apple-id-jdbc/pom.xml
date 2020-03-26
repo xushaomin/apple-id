@@ -26,6 +26,12 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.appleframework.id</groupId>
+			<artifactId>apple-id-test</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>

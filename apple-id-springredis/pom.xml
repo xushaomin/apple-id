@@ -14,6 +14,7 @@
 
 	<properties>
 		<spring.boot>2.2.5.RELEASE</spring.boot>
+		<jedis.version>3.2.0</jedis.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<commons-pool2.version>2.2</commons-pool2.version>
 	</properties>
@@ -29,6 +30,31 @@
 			<artifactId>apple-id-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.appleframework.id</groupId>
+			<artifactId>apple-id-test</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>${commons-pool2.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>

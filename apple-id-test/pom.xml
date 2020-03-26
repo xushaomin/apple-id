@@ -8,35 +8,20 @@
 		<artifactId>apple-id</artifactId>
 		<version>0.1.0.RELEASE</version>
 	</parent>
-	<artifactId>apple-id-snowflake</artifactId>
-	<name>apple-id-snowflake</name>
+	<artifactId>apple-id-test</artifactId>
+	<name>apple-id-test</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>com.appleframework.id</groupId>
 			<artifactId>apple-id-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.appleframework.id</groupId>
-			<artifactId>apple-id-test</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.yammer.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 </project>

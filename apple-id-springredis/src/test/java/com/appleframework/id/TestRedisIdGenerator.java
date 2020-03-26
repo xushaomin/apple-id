@@ -1,16 +1,15 @@
 package com.appleframework.id;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
+import org.junit.After;
+import org.junit.Before;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.junit.After;
-import org.junit.Before;
-import org.springframework.data.redis.core.RedisTemplate;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * Test case for {@link RedisIdGenerator}
@@ -22,66 +21,71 @@ public class TestRedisIdGenerator extends TestCase {
 
     private RedisTemplate<String, Long> redisTemplate;
     private RedisIdGenerator idGenerator;
+    
+    private String hostName = "localhost";
+    private String passWord = null;
+    private Integer port = 6379;
+    private Integer database = 0;
+    
 
     public static Test suite() {
         return new TestSuite(TestRedisIdGenerator.class);
     }
+    
+    @SuppressWarnings("deprecation")
+	public RedisConnectionFactory redisConnectionFactory(){  
+        JedisPoolConfig poolConfig=new JedisPoolConfig();  
+        poolConfig.setMaxIdle(10);  
+        poolConfig.setMinIdle(1);  
+        poolConfig.setTestOnBorrow(true);  
+        poolConfig.setTestOnReturn(true);  
+        poolConfig.setTestWhileIdle(true);  
+        poolConfig.setNumTestsPerEvictionRun(10);  
+        poolConfig.setTimeBetweenEvictionRunsMillis(60000);  
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(poolConfig);  
+        jedisConnectionFactory.setHostName(hostName);  
+        if(null != passWord && !passWord.isEmpty()){  
+            jedisConnectionFactory.setPassword(passWord);  
+        }  
+        jedisConnectionFactory.setPort(port);  
+        jedisConnectionFactory.setDatabase(database);  
+        return jedisConnectionFactory;  
+    }
+    
+    public RedisTemplate<String, Long> redisTemplateObject() throws Exception {  
+        RedisTemplate<String, Long> redisTemplateObject = new RedisTemplate<String, Long>();  
+        redisTemplateObject.setConnectionFactory(redisConnectionFactory());  
+        redisTemplateObject.afterPropertiesSet();  
+        return redisTemplateObject;  
+    }
 
     @Before
     public void setUp() throws Exception {
-        boolean done = true;
-        do {
-            IRedisClient redisClient = redisFactory.getRedisClient(REDIS_HOST, REDIS_PORT);
-            if (redisClient != null) {
-                try {
-                    redisClient.ping();
-                } catch (Exception e) {
-                    done = false;
-                } finally {
-                    redisClient.close();
-                }
-            }
-        } while (!done);
-        redisFactory.destroy();
-
+        redisTemplate = this.redisTemplateObject();
         idGenerator = RedisIdGenerator.getInstance(redisTemplate);
     }
 
     @After
     public void tearDown() throws Exception {
-        redisServer.stop();
-        Thread.sleep(5000);
-        RedisClientFactory redisFactory = RedisClientFactory.newFactory();
-        boolean done = false;
-        do {
-            try {
-                Socket socket = new Socket(REDIS_HOST, REDIS_PORT);
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                out.println("ping");
-                out.close();
-                socket.close();
-            } catch (IOException e) {
-                done = true;
-            }
-        } while (!done);
-        redisFactory.destroy();
-
         Thread.sleep(5000);
     }
 
     @org.junit.Test
     public void test1() throws Exception {
+    	System.out.println(idGenerator.nextId("default"));
         assertEquals(0, idGenerator.currentId("default"));
     }
 
     @org.junit.Test
     public void test2() throws Exception {
+    	System.out.println(idGenerator.nextId("default"));
         assertEquals(1, idGenerator.nextId("default"));
         assertEquals(2, idGenerator.nextId("default"));
     }
 
     @org.junit.Test
     public void test3() throws Exception {
+    	System.out.println(idGenerator.nextId("default"));
         assertEquals(0, idGenerator.currentId("default"));
         assertEquals(1, idGenerator.nextId("default"));
         assertEquals(1, idGenerator.currentId("default"));

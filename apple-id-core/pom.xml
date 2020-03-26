@@ -11,18 +11,11 @@
 	<artifactId>apple-id-core</artifactId>
 	<name>apple-id-core</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yammer.metrics</groupId>
-			<artifactId>metrics-core</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
