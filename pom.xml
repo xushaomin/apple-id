@@ -51,6 +51,7 @@
 		<module>apple-id-snowflake</module>
     	<module>apple-id-codis</module>
     	<module>apple-id-redisson</module>
+    	<module>apple-id-springredis</module>
 	</modules>
 	
 	<build>
