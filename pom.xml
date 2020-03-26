@@ -52,6 +52,7 @@
     	<module>apple-id-codis</module>
     	<module>apple-id-redisson</module>
     	<module>apple-id-springredis</module>
+    	<module>apple-id-starter</module>
 	</modules>
 	
 	<build>

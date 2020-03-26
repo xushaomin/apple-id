@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.appleframework.id</groupId>
+		<artifactId>apple-id-starter</artifactId>
+		<version>0.1.0.RELEASE</version>
+	</parent>
+	<artifactId>apple-id-starter-springredis</artifactId>
+	<name>apple-id-starter-springredis</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<spring.boot>2.2.5.RELEASE</spring.boot>
+		<jedis.version>2.9.0</jedis.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<commons-pool2.version>2.2</commons-pool2.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.appleframework.id</groupId>
+			<artifactId>apple-id-springredis</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>		
+		<dependency>
+		  	<groupId>org.springframework.boot</groupId>
+		  	<artifactId>spring-boot-starter-data-redis</artifactId>
+		  	<version>${spring.boot}</version>
+		  	<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>
