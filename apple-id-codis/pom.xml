@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.appleframework.id</groupId>
 		<artifactId>apple-id</artifactId>
-		<version>0.1.0.RELEASE</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>apple-id-codis</artifactId>
 	<name>apple-id-codis</name>
@@ -14,6 +14,7 @@
 	
 	<properties>
 		<curator.version>2.10.0</curator.version>
+		<jackson.version>2.12.1</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -25,7 +26,7 @@
 		<dependency>
 			<groupId>io.codis.jodis</groupId>
 			<artifactId>jodis</artifactId>
-			<version>0.4.0</version>
+			<version>0.5.1</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.curator</groupId>
@@ -42,11 +43,6 @@
 			<artifactId>apple-id-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
@@ -61,7 +57,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -70,7 +65,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.7.4</version>
+            <version>${jackson.version}</version>
             <exclusions>
             	<exclusion>
             		<groupId>com.fasterxml.jackson.core</groupId>
@@ -81,7 +76,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.7.4</version>
+            <version>${jackson.version}</version>
         </dependency>
         
 	</dependencies>

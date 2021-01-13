@@ -1,11 +1,12 @@
 package com.appleframework.id.redis.impl;
 
-import redis.clients.jedis.Jedis;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.appleframework.id.redis.PoolConfig;
 import com.appleframework.id.redis.RedisClientFactory;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * Redis client factory that uses {@link Jedis
@@ -16,7 +17,7 @@ import com.appleframework.id.redis.RedisClientFactory;
  */
 public class JedisClientFactory extends RedisClientFactory {
 
-	private static Logger logger = Logger.getLogger(JedisClientFactory.class);  
+	private static Logger logger = LoggerFactory.getLogger(JedisClientFactory.class);  
 
     /**
      * {@inheritDoc}

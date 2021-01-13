@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.appleframework.id</groupId>
 	<artifactId>apple-id</artifactId>
-	<version>0.1.0.RELEASE</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>apple-id</name>
@@ -12,7 +14,9 @@
 
 	<properties>
 		<file.encoding>UTF-8</file.encoding>
-		<guava.version>19.0</guava.version>
+		<guava.version>30.1-jre</guava.version>
+		<commons-lang3.version>3.11</commons-lang3.version>
+		<commons-pool2.version>2.9.0</commons-pool2.version>
 	</properties>
 
 	<dependencyManagement>
@@ -20,7 +24,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.12</version>
+				<version>4.13.1</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -30,18 +34,29 @@
 				<optional>true</optional>
 			</dependency>
 			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-			</dependency>
-			<dependency>
 				<groupId>com.yammer.metrics</groupId>
 				<artifactId>metrics-core</artifactId>
 				<version>2.2.0</version>
 			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.30</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-pool2</artifactId>
+				<version>${commons-pool2.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<modules>
 		<module>apple-id-core</module>
 		<module>apple-id-test</module>
@@ -49,12 +64,12 @@
 		<module>apple-id-zookeeper</module>
 		<module>apple-id-jdbc</module>
 		<module>apple-id-snowflake</module>
-    	<module>apple-id-codis</module>
-    	<module>apple-id-redisson</module>
-    	<module>apple-id-springredis</module>
-    	<module>apple-id-starter</module>
+		<module>apple-id-codis</module>
+		<module>apple-id-redisson</module>
+		<module>apple-id-springredis</module>
+		<module>apple-id-starter</module>
 	</modules>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -107,16 +122,16 @@
 					</systemProperties>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
-						<manifestEntries>  
-                     		<Bundle-Name>${project.artifactId}</Bundle-Name>
-                     		<Bundle-Version>${project.version}</Bundle-Version>
-                     	</manifestEntries>  
+						<manifestEntries>
+							<Bundle-Name>${project.artifactId}</Bundle-Name>
+							<Bundle-Version>${project.version}</Bundle-Version>
+						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
@@ -132,14 +147,14 @@
 			<distributionManagement>
 				<repository>
 					<id>apple-releases</id>
-					<url>http://mvnrepo.appleframework.com:8081/nexus/content/repositories/releases/</url>
+					<url>http://nexus3.appleframework.com:8081/repository/apple-releases/</url>
 				</repository>
 				<snapshotRepository>
 					<id>apple-snapshots</id>
-					<url>http://mvnrepo.appleframework.com:8081/nexus/content/repositories/snapshots/</url>
+					<url>http://nexus3.appleframework.com:8081/repository/apple-snapshots/</url>
 				</snapshotRepository>
 			</distributionManagement>
 		</profile>
 	</profiles>
-	
+
 </project>

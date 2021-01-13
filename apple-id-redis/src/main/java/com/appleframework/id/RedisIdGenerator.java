@@ -3,7 +3,8 @@ package com.appleframework.id;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.appleframework.id.exception.IdException;
 import com.appleframework.id.redis.IRedisClient;
@@ -23,8 +24,7 @@ import com.appleframework.id.redis.RedisClientFactory;
  */
 public class RedisIdGenerator extends SerialIdGenerator implements IdentityGenerator {
 
-	private static Logger logger = Logger.getLogger(RedisIdGenerator.class);  
-
+	private static Logger logger = LoggerFactory.getLogger(RedisIdGenerator.class);  
 
     /**
      * Helper method to obtain {@link RedisIdGenerator}.

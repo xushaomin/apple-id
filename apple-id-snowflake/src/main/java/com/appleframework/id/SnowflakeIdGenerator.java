@@ -1,12 +1,11 @@
 package com.appleframework.id;
 
 import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.appleframework.id.utils.HttpRequestUtil;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -50,13 +49,21 @@ public class SnowflakeIdGenerator implements IdentityGenerator {
 				}
 			});
 	private static long macAddr = 0;
+	private static String LEAF_SERVER = "http://id.appleframework.com";
 	static {
 		try {
-			InetAddress ip = InetAddress.getLocalHost();
-			NetworkInterface network = NetworkInterface.getByInetAddress(ip);
-			byte[] mac = network.getHardwareAddress();
-			for (byte temp : mac) {
-				macAddr = (macAddr << 8) | ((int) temp & 0xFF);
+			String result = null;
+			for (int i = 0; i < 3; i++) {
+				if(null == result || result.length() == 0) {
+					result = HttpRequestUtil.sendGet(LEAF_SERVER + "/api/segment/get/apple");
+				} else {
+					break;
+				}
+			}
+			if(null != result && result.length() > 0) {
+				macAddr = Integer.parseInt(result);
+			} else {
+				macAddr = System.currentTimeMillis();
 			}
 		} catch (Exception e) {
 			macAddr = System.currentTimeMillis();

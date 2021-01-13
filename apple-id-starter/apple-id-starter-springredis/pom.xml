@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.appleframework.id</groupId>
 		<artifactId>apple-id-starter</artifactId>
-		<version>0.1.0.RELEASE</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>apple-id-starter-springredis</artifactId>
 	<name>apple-id-starter-springredis</name>
@@ -25,10 +25,6 @@
 			<artifactId>apple-id-springredis</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>		
 		<dependency>
 		  	<groupId>org.springframework.boot</groupId>
 		  	<artifactId>spring-boot-starter-data-redis</artifactId>

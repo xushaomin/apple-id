@@ -3,7 +3,8 @@ package com.appleframework.id.redis;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.appleframework.id.redis.impl.JedisClientFactory;
 import com.appleframework.id.redis.impl.JedisClientPool;
@@ -20,7 +21,7 @@ import com.google.common.cache.RemovalNotification;
  */
 public abstract class RedisClientFactory {
 
-	private static Logger logger = Logger.getLogger(RedisClientFactory.class);  
+	private static Logger logger = LoggerFactory.getLogger(RedisClientFactory.class);  
 
     // /**
     // * Stores established Redis client pools as a map of {key:pool}.

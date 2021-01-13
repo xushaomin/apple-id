@@ -3,11 +3,12 @@ package com.appleframework.id;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.log4j.Logger;
 import org.redisson.Redisson;
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -23,7 +24,7 @@ import org.redisson.config.Config;
  */
 public class RedissonIdGenerator extends SerialIdGenerator implements IdentityGenerator {
 
-	private static Logger logger = Logger.getLogger(RedissonIdGenerator.class);  
+	private static Logger logger = LoggerFactory.getLogger(RedissonIdGenerator.class);  
 
 	private RedissonClient redisson;
 	

@@ -5,7 +5,8 @@ import java.util.Set;
 
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.GenericObjectPool;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Apache commons-pool2 of {@link IRedisClient} instances.
@@ -15,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class RedisClientPool<T extends IRedisClient> extends GenericObjectPool<T> {
 
-	private static Logger logger = Logger.getLogger(RedisClientPool.class);  
+	private static Logger logger = LoggerFactory.getLogger(RedisClientPool.class);  
 
 	private PoolConfig poolConfig;
     private Set<T> activeClients = new HashSet<T>();
